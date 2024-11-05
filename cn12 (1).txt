@@ -1,0 +1,41 @@
+# Forward
+# Enter '1' to look up a domain from an IP address or '2' to look up an IP address from a domain: 2
+# Enter the domain name: google.com
+# IP address for domain google.com: 142.250.72.206
+
+# backward
+# Enter '1' to look up a domain from an IP address or '2' to look up an IP address from a domain: 1
+# Enter the IP address: 142.250.72.206
+# Domain name for IP 142.250.72.206: mia09s28-in-f14.1e100.net
+
+
+import socket
+
+def dns_lookup():
+   
+    choice = input("Enter '1' to look up a domain from an IP address or '2' to look up an IP address from a domain: ")
+    
+    if choice == '1':
+        
+        ip_address = input("Enter the IP address: ")
+        try:
+            domain_name = socket.gethostbyaddr(ip_address)
+            print(f"Domain name for IP {ip_address}: {domain_name[0]}")
+        except socket.herror:
+            print(f"No domain name found for IP {ip_address}")
+    
+    elif choice == '2':
+        
+        
+        domain = input("Enter the domain name: ")
+        try:
+            ip_address = socket.gethostbyname(domain)
+            print(f"IP address for domain {domain}: {ip_address}")
+        except socket.gaierror:
+            print(f"No IP address found for domain {domain}")
+    
+    else:
+        print("Invalid choice. Please enter '1' or '2'.")
+
+if __name__ == "__main__":
+    dns_lookup()
